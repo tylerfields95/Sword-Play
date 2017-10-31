@@ -14,6 +14,7 @@ public class firstPersonController : MonoBehaviour {
 	private float verticalVelocity = 0;
 
 	private CharacterController characterController;
+	public GameObject sword;
 		
 
 	// Use this for initialization
@@ -21,7 +22,6 @@ public class firstPersonController : MonoBehaviour {
         //locks cursor to the game
         Cursor.lockState = CursorLockMode.Locked;
 		characterController = GetComponent<CharacterController>();
-
 	}
 	
 	// Update is called once per frame
@@ -38,9 +38,20 @@ public class firstPersonController : MonoBehaviour {
         //movement
         float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
         float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+		Debug.Log("forward speed: " + forwardSpeed.ToString("F4"));
+		Debug.Log("side speed: " + sideSpeed.ToString("F4"));
 
 		verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
+
+		Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+		Debug.Log("mousePosX: " + mousePos.x.ToString());
+		Debug.Log("mousePosY: " + mousePos.y.ToString());
+		if (Input.GetMouseButtonDown(0))
+		{
+			
+		}
+		
 		if ( characterController.isGrounded && Input.GetButtonDown("Jump"))
 		{
 			verticalVelocity = jumpSpeed;
