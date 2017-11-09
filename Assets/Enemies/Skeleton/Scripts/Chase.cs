@@ -44,7 +44,19 @@ public class Chase : MonoBehaviour {
 			anim.SetBool("is_idle", true);
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
+			
 		}
 
+	}
+	void OnTriggerEnter(Collider other){
+		Debug.Log(other.name);
+		if(other.name=="Cube"){
+			anim.SetBool("is_idle", false);
+			anim.SetBool("is_walking", false);
+			anim.SetBool("is_attacking", false);
+			anim.SetBool("is_damaged",true);
+			
+		}
+		
 	}
 }

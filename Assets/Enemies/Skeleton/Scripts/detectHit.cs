@@ -5,7 +5,7 @@ using UnityEngine;
 public class detectHit : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
-		Debug.Log("Hit");
+		Debug.Log(other.name);
 		
 	}
 	// Use this for initialization

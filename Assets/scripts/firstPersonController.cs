@@ -88,7 +88,7 @@ public class firstPersonController : MonoBehaviour {
 	}
 
 	void ScreenRegion(Vector3 mP)
-	{
+	{	/*
 		Debug.Log("entered ScreenRegion");
 		
 		setFalse();
@@ -108,10 +108,12 @@ public class firstPersonController : MonoBehaviour {
 			{
 				region[0] = true;
 			}
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 0 " + region[0].ToString());
 			Debug.Log("***********************************************");
+			
 		}
 		if ((mP.x > 0.33 && mP.x < 0.67) && mP.y < 0.34) //Bottom Middle
 		{
@@ -119,10 +121,12 @@ public class firstPersonController : MonoBehaviour {
 			{
 				region[1] = true;
 			}
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 1 " + region[1].ToString());
 			Debug.Log("***********************************************");
+			
 		}
 		if (mP.x > 0.66 && mP.y < 0.34) //Bottom Right
 		{
@@ -130,10 +134,12 @@ public class firstPersonController : MonoBehaviour {
 			{
 				region[2] = true;
 			}
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 2 " + region[2].ToString());
 			Debug.Log("***********************************************");
+			
 		}
 		if (mP.x < 0.34 && (mP.y > 0.33 && mP.y < 0.67)) //Middle Left
 		{
@@ -198,6 +204,7 @@ public class firstPersonController : MonoBehaviour {
 			New = true;
 			setFalse();
 		}
+		*/
 	}
 
 	void setFalse()
