@@ -57,7 +57,7 @@ public class firstPersonController : MonoBehaviour {
 		
 
 		
-		/*
+		
 			//rotation
 			float rotLeftRight = Input.GetAxis("Mouse X") * mouseSensitivity;
 			transform.Rotate(0, rotLeftRight, 0);
@@ -65,7 +65,7 @@ public class firstPersonController : MonoBehaviour {
 			verticleRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
 			verticleRotation = Mathf.Clamp(verticleRotation, -upDownRange, upDownRange);
 			Camera.main.transform.localRotation = Quaternion.Euler(verticleRotation, 0, 0);
-		*/
+		
 		
 		
 		
