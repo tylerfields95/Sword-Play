@@ -35,19 +35,33 @@ public class Chase : MonoBehaviour {
 			anim.SetBool("is_idle",false);
 			if(direction.magnitude > 3)
 			{
-				     movement.y -= 20.0f * Time.deltaTime;
+				 movement.y -= 20.0f * Time.deltaTime;
 
 				controller.Move(movement * Time.deltaTime);
 				anim.SetBool("is_walking",true);
 				anim.SetBool("is_attacking",false);
 				anim.SetBool("is_damaged",false);
-
+				anim.SetBool("is_block1",false);
+										
 			}
 			else
 			{
+				if(Random.Range( 0.0f, 1.0f )>0.4f){
+
+					
 				anim.SetBool("is_attacking",true);
-				anim.SetBool("is_walking",false);
-				anim.SetBool("is_damaged",false);
+						anim.SetBool("is_walking",false);
+						anim.SetBool("is_damaged",false);
+						anim.SetBool("is_block1",false);
+				}
+				else{
+
+						anim.SetBool("is_attacking",false);
+						anim.SetBool("is_walking",false);
+						anim.SetBool("is_damaged",false);
+						anim.SetBool("is_block1",true);
+					
+				}
 
 			}
 
@@ -58,21 +72,27 @@ public class Chase : MonoBehaviour {
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
 			anim.SetBool("is_damaged",false);
+			anim.SetBool("is_block1",false);
 			
 		}
 
 	}
 	void OnTriggerEnter(Collider other){
-		Debug.Log(other.name);
-	
+
+		
 		if(other.name=="Cube"){
 			anim.Play("Damage",0, 0.0f);
 			anim.SetBool("is_idle", false);
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
+			anim.SetBool("is_block1",false);
 
 			
 		}
 		
 	}
+
+		
+		
+	
 }
