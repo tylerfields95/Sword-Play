@@ -7,10 +7,13 @@ public class Chase : MonoBehaviour {
 	private Animator anim;
 	float speed = .5f;
 
+
+
 	// Use this for initialization
 	void Start () 
 	{
 		anim = GetComponent<Animator>();
+
 	}
 	
 	// Update is called once per frame
@@ -42,24 +45,36 @@ public class Chase : MonoBehaviour {
 				anim.SetBool("is_attacking",false);
 				anim.SetBool("is_damaged",false);
 				anim.SetBool("is_block1",false);
+				anim.SetBool("is_attack2",false);
 										
 			}
 			else
 			{
-				if(Random.Range( 0.0f, 1.0f )>0.4f){
+				int rando = Random.Range(1,4);
+				if(rando==1){
 
 					
 				anim.SetBool("is_attacking",true);
 						anim.SetBool("is_walking",false);
 						anim.SetBool("is_damaged",false);
 						anim.SetBool("is_block1",false);
+						anim.SetBool("is_attack2",false);
 				}
-				else{
+				else if(rando ==2){
 
 						anim.SetBool("is_attacking",false);
 						anim.SetBool("is_walking",false);
 						anim.SetBool("is_damaged",false);
 						anim.SetBool("is_block1",true);
+						anim.SetBool("is_attack2",false);
+					
+				}
+				else{
+					anim.SetBool("is_attacking",false);
+						anim.SetBool("is_walking",false);
+						anim.SetBool("is_damaged",false);
+						anim.SetBool("is_block1",false);
+						anim.SetBool("is_attack2",true);
 					
 				}
 
@@ -73,6 +88,7 @@ public class Chase : MonoBehaviour {
 			anim.SetBool("is_attacking", false);
 			anim.SetBool("is_damaged",false);
 			anim.SetBool("is_block1",false);
+			anim.SetBool("is_attack2",false);
 			
 		}
 
@@ -86,6 +102,7 @@ public class Chase : MonoBehaviour {
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
 			anim.SetBool("is_block1",false);
+			anim.SetBool("is_attack2",false);
 
 			
 		}

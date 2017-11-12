@@ -16,6 +16,7 @@ public class detectHit : MonoBehaviour {
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
 			anim.SetBool("is_block1",false);
+			anim.SetBool("is_attack2",false);
 
 			
 		
