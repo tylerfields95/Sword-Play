@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 136960092131077996}
   - component: {fileID: 114330344359676258}
   - component: {fileID: 114475254949538912}
+  - component: {fileID: 143561444322723432}
   m_Layer: 0
   m_Name: Skeleton@Skin
   m_TagString: Untagged
@@ -741,8 +742,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849594333183094}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 3.32, y: -2.0254607e-16, z: 19.62}
-  m_LocalScale: {x: 24.007, y: 24.077, z: 24.077}
+  m_LocalPosition: {x: 3.32, y: 0.38, z: 23.07}
+  m_LocalScale: {x: 19, y: 19, z: 19}
   m_Children:
   - {fileID: 4854150754773018}
   - {fileID: 4104976096425676}
@@ -1458,3 +1459,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0014118608, y: 0.00002192147, z: 0.040557608}
     m_Extent: {x: 0.012434602, y: 0.006705285, z: 0.05640191}
   m_DirtyAABB: 0
+--- !u!143 &143561444322723432
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849594333183094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.15
+  m_Radius: 0.005
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.075, z: 0}
