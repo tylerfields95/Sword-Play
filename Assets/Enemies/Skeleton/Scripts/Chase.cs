@@ -4,7 +4,7 @@ using System.Collections;
 public class Chase : MonoBehaviour {
 
 	public Transform player;
-	static Animator anim;
+	public Animator anim;
 
 	// Use this for initialization
 	void Start () 
@@ -17,7 +17,7 @@ public class Chase : MonoBehaviour {
 	{
 		Vector3 direction = player.position - this.transform.position;
 		float angle = Vector3.Angle(direction,this.transform.forward);
-		if(Vector3.Distance(player.position, this.transform.position) < 10 && angle < 30)
+		if(Vector3.Distance(player.position, this.transform.position) < 15 && angle < 60)
 		{
 			
 			direction.y = 0;
