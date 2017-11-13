@@ -34,14 +34,14 @@ public class PlayerVitals : MonoBehaviour {
         playerController = GetComponent<firstPersonController>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Sword")
-        {
-            healthSlider.value -= damage;
-            print("TESTTESTTEST");
-        }
-    }
+   // private void OnCollisionEnter(Collider other)
+   // {
+       // if (other.gameObject.tag == "Enemy")
+      //  {
+           // healthSlider.value -= damage;
+          //  print("TESTTESTTEST");
+        //}
+   // }
     void Update()
     {
         //Health control section
