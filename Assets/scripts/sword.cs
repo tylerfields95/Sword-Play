@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class sword : MonoBehaviour {
 	
@@ -8,12 +6,14 @@ public class sword : MonoBehaviour {
 	private float startT;
 	private float endT;	
 	private Vector3 mousePos;
+	public AudioSource swing;
 	
 	public Animator swordAnimator;
 	
 	// Use this for initialization
 	void Start () {
 		swordAnimator = GetComponent<Animator>();
+		swing = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -158,6 +158,7 @@ public class sword : MonoBehaviour {
 			setFalse();
 			Debug.Log("swipe right to left");
 			swordAnimator.SetTrigger("RTL");
+			swing.PlayDelayed(0.27f);
 			swordAnimator.SetTrigger("setIdle");
 		}
 	}

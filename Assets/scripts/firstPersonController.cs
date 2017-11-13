@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Runtime.Remoting.Services;
-using JetBrains.Annotations;
-using NUnit.Framework;
-using NUnit.Framework.Internal.Execution;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class firstPersonController : MonoBehaviour {

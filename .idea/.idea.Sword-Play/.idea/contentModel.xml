@@ -23,6 +23,8 @@
         </e>
         <e p="scripts" t="Include">
           <e p="firstPersonController.cs" t="Include" />
+          <e p="footSteps.cs" t="Include" />
+          <e p="sceneMusic.cs" t="Include" />
           <e p="sword.cs" t="Include" />
         </e>
       </e>
