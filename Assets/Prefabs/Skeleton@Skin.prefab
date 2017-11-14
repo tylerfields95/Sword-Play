@@ -524,7 +524,6 @@ GameObject:
   - component: {fileID: 95433398262136202}
   - component: {fileID: 136960092131077996}
   - component: {fileID: 114330344359676258}
-  - component: {fileID: 114475254949538912}
   - component: {fileID: 143561444322723432}
   m_Layer: 0
   m_Name: Skeleton@Skin
@@ -1312,18 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223a7f214d7140341899c1c1c3815003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
---- !u!114 &114475254949538912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1849594333183094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6676af436a04742adb04cd24240e83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  player: {fileID: 4380492035370542, guid: 6fd845a42e2c3144faff3da8c87db60f, type: 2}
 --- !u!114 &114913255087538168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1335,6 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6676af436a04742adb04cd24240e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!136 &136960092131077996
 CapsuleCollider:
   m_ObjectHideFlags: 1
