@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Just in case.unity
+  isLoaded: 1
+  isActive: 1
