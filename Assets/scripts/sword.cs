@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class sword : MonoBehaviour {
 	
 	private bool [] region = new bool[9];
 	private float startT;
-	private float endT;	
-	private Vector3 mousePos;
-	public AudioSource swing;
-	
-	public Animator swordAnimator;
+	private float endT;
+    public Slider staminaSlider;
+    private Vector3 mousePos;
+    public int damageToGive;
+    public Animator swordAnimator;
 	
 	// Use this for initialization
 	void Start () {
 		swordAnimator = GetComponent<Animator>();
-		swing = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -21,7 +23,7 @@ public class sword : MonoBehaviour {
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
-			//Debug.Log(("LM held"));
+			Debug.Log(("LM held"));
 			//grabs mouse position relative to the camera viewport (x=0.0-1.0, y=0.0-1.0) 
 			//bottom left == (0.0f,0.0f)
 			mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
@@ -37,16 +39,16 @@ public class sword : MonoBehaviour {
 	}
 	void ScreenRegion(Vector3 mP)
 	{
-		//Debug.Log("entered ScreenRegion");
+		Debug.Log("entered ScreenRegion");
 		if ((mP.x > 0.33 && mP.x < 0.67) && (mP.y > 0.33 && mP.y < 0.67)) //Middle Middle
 		{
 			region[4] = true;
 			//startT = Time.time;
-		/*	
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if (mP.x < 0.34 && mP.y < 0.34) //Bottom Left
 		{
@@ -55,12 +57,12 @@ public class sword : MonoBehaviour {
 			{
 				region[0] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 0 " + region[0].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if ((mP.x > 0.33 && mP.x < 0.67) && mP.y < 0.34) //Bottom Middle
 		{
@@ -68,12 +70,10 @@ public class sword : MonoBehaviour {
 			{
 				region[1] = true;
 			}
-			/*
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 1 " + region[1].ToString());
 			Debug.Log("***********************************************");
-			*/
 		}
 		if (mP.x > 0.66 && mP.y < 0.34) //Bottom Right
 		{
@@ -81,12 +81,12 @@ public class sword : MonoBehaviour {
 			{
 				region[2] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 2 " + region[2].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if (mP.x < 0.34 && (mP.y > 0.33 && mP.y < 0.67)) //Middle Left
 		{
@@ -94,12 +94,12 @@ public class sword : MonoBehaviour {
 			if (region[4] == true)
 				region[3] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 3 " + region[3].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		
 		if (mP.x > 0.66 && (mP.y > 0.33 && mP.y < 0.67)) //Middle Right
@@ -108,12 +108,12 @@ public class sword : MonoBehaviour {
 			{
 				region[5] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 5 " + region[5].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if (mP.x < 0.34 && mP.y > 0.66) //Top Left
 		{
@@ -121,12 +121,12 @@ public class sword : MonoBehaviour {
 			{
 				region[6] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 6 " + region[6].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if ((mP.x > 0.33 && mP.x < 0.67) && mP.y > 0.66) //Top Middle
 		{
@@ -134,12 +134,12 @@ public class sword : MonoBehaviour {
 			{
 				region[7] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 7 " + region[7].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 		if (mP.x > 0.66 && mP.y > 0.66) //Top Right
 		{
@@ -147,22 +147,22 @@ public class sword : MonoBehaviour {
 			{
 				region[8] = true;
 			}
-			/*
+			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 8 " + region[8].ToString());
 			Debug.Log("***********************************************");
-			*/
+			
 		}
 
-		if (region[3] == true && region[5] == true)
-		{
-			setFalse();
-			Debug.Log("swipe right to left");
-			swordAnimator.SetTrigger("RTL");
-			swing.PlayDelayed(0.27f);
-			swordAnimator.SetTrigger("setIdle");
-		}
+        if (region[3] == true && region[5] == true)
+        {
+            setFalse();
+            Debug.Log("swipe right to left");
+            swordAnimator.SetTrigger("RTL");
+            swordAnimator.SetTrigger("setIdle");
+            staminaSlider.value -= 5;
+        }
 	}
 
 	void setFalse()
@@ -172,4 +172,12 @@ public class sword : MonoBehaviour {
 			region[i] = false;
 		}
 	}
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Enemy" )
+        {
+            col.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive);
+        }
+    }
+
 }

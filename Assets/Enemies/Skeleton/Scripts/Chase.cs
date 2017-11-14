@@ -6,7 +6,7 @@ public class Chase : MonoBehaviour {
 	public Transform player;
 	private Animator anim;
 	private int in_combat;
-	float speed = .5f;
+	private float speed = .3f;
 	detectHit hit;
 	
 
@@ -45,7 +45,7 @@ public class Chase : MonoBehaviour {
 			
 			
 			Vector3 movement = direction*speed;
-		
+
 		
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 2 && in_combat <0)

@@ -1,10 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Runtime.Remoting.Services;
+using JetBrains.Annotations;
+using NUnit.Framework;
+using NUnit.Framework.Internal.Execution;
+using UnityEditor;
+using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class firstPersonController : MonoBehaviour {
     public float movementSpeed = 5.0f;
+    public float movementSpeedNorm = 5.0f;
+    public float walkSpeed = 2.0f;
     public float mouseSensitivity = 5.0f;
-	public float jumpSpeed = 20.0f;
+	public float jumpSpeed = 6.0f;
 
 	
 	

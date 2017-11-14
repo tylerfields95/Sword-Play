@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class detectHit : MonoBehaviour {
 	private Animator anim;
-	public Transform player;
+
 	public bool parry;
-	
-	void OnTriggerEnter(Collider other){
-
-
-		if(other.name=="HumanSword"){
+    public Slider healthSlider;
+    public int maxHealth;
+    private int damage = 10;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform respawnPoint;
+    
+    // Use this for initialization
+    //void Start () {
+        //healthSlider.maxValue = maxHealth;
+        //healthSlider.value = maxHealth;
+   // }
+    private void OnTriggerEnter(Collider col)
+    {
+    	if(col.name=="HumanSword"){
 			Debug.Log("PARRY/BLOCK");
 			GetBack();
 			anim.SetTrigger("is_blocked");
@@ -20,19 +30,25 @@ public class detectHit : MonoBehaviour {
 		
 		
 		}
+        if (col.tag == "Player")
+        {
+            healthSlider.value -= damage;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
+    	if(healthSlider.value <=0){
+    		player.transform.position = respawnPoint.transform.position;
+    		healthSlider.value = 100;
+    	}
 		
 	}
-	// Use this for initialization
-	void Start () {
+    void Start () {
 		anim = transform.root.GetComponent<Animator>();
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	void  GetBack(){
+    	void  GetBack(){
 		CharacterController controller = transform.root.GetComponent<CharacterController>();
 		Vector3 direction = player.position - transform.root.transform.position;
 		Debug.Log(direction);
