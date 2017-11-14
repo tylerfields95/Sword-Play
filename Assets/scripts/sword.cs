@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class sword : MonoBehaviour {
 	
 	private bool [] region = new bool[9];
 	private float startT;
-	private float endT;	
-	private Vector3 mousePos;
-	
-	public Animator swordAnimator;
+	private float endT;
+    public Slider staminaSlider;
+    private Vector3 mousePos;
+    public int damageToGive;
+    public Animator swordAnimator;
 	
 	// Use this for initialization
 	void Start () {
@@ -153,13 +155,14 @@ public class sword : MonoBehaviour {
 			
 		}
 
-		if (region[3] == true && region[5] == true)
-		{
-			setFalse();
-			Debug.Log("swipe right to left");
-			swordAnimator.SetTrigger("RTL");
-			swordAnimator.SetTrigger("setIdle");
-		}
+        if (region[3] == true && region[5] == true)
+        {
+            setFalse();
+            Debug.Log("swipe right to left");
+            swordAnimator.SetTrigger("RTL");
+            swordAnimator.SetTrigger("setIdle");
+            staminaSlider.value -= 5;
+        }
 	}
 
 	void setFalse()
@@ -169,4 +172,12 @@ public class sword : MonoBehaviour {
 			region[i] = false;
 		}
 	}
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Enemy" && Input.GetMouseButton(0))
+        {
+            col.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(damageToGive);
+        }
+    }
+
 }
