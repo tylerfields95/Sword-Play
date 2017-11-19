@@ -30,7 +30,7 @@ public class detectHit : MonoBehaviour {
 		
 		
 		}
-        if (col.tag == "Player")
+        if (col.tag == "Hitbox")
         {
             healthSlider.value -= damage;
         }

@@ -157,9 +157,9 @@ GameObject:
   - component: {fileID: 4651010995335986}
   - component: {fileID: 33640162821603094}
   - component: {fileID: 23947861135232570}
-  - component: {fileID: 114913255087538168}
   - component: {fileID: 54093997602131748}
   - component: {fileID: 64232632554876702}
+  - component: {fileID: 114613335934885050}
   m_Layer: 0
   m_Name: SkeletonSword
   m_TagString: Untagged
@@ -525,9 +525,10 @@ GameObject:
   - component: {fileID: 136960092131077996}
   - component: {fileID: 114330344359676258}
   - component: {fileID: 143561444322723432}
+  - component: {fileID: 114297672016258898}
   m_Layer: 0
   m_Name: Skeleton@Skin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,7 +742,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849594333183094}
   m_LocalRotation: {x: 0, y: 0.99156934, z: 0, w: 0.12957758}
-  m_LocalPosition: {x: -1.5858727, y: 4.1276048e-18, z: -0.1858908}
+  m_LocalPosition: {x: 1.4, y: 4.1276048e-18, z: 21.6}
   m_LocalScale: {x: 17, y: 17, z: 17}
   m_Children:
   - {fileID: 4854150754773018}
@@ -1298,6 +1299,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114297672016258898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1849594333183094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ed822ad4d36294e8b38c8ddafa085c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 30
+  CurrentHealth: 30
+  enemy: {fileID: 4109802259564978}
+  enemyRespawnPoint: {fileID: 0}
 --- !u!114 &114330344359676258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1310,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
---- !u!114 &114913255087538168
+--- !u!114 &114613335934885050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1321,8 +1337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6676af436a04742adb04cd24240e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   parry: 0
+  healthSlider: {fileID: 0}
+  maxHealth: 100
+  player: {fileID: 0}
+  respawnPoint: {fileID: 0}
 --- !u!136 &136960092131077996
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1335,7 +1354,7 @@ CapsuleCollider:
   m_Radius: 0.001
   m_Height: 0.07
   m_Direction: 1
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Center: {x: 0.02, y: 0.1, z: -0.02}
 --- !u!137 &137007927316364500
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

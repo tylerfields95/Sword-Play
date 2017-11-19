@@ -95,6 +95,7 @@ public class Chase : MonoBehaviour {
 							if(in_combat<0){
 							in_combat = 150;
 							}
+						
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -122,7 +123,7 @@ public class Chase : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 
 
-		if(other.name=="HumanSword"){
+		if(other.name=="HumanSword" && sword.can_damage>0){
 			anim.Play("Damage",0, 0.0f);
 			in_combat = 50;
 			anim.SetBool("is_idle", false);
