@@ -6,6 +6,7 @@ public class Chase : MonoBehaviour {
 	public Transform player;
 	private Animator anim;
 	private int in_combat;
+	public bool is_corpse;
 	private float speed = .3f;
 	detectHit hit;
 	
@@ -15,7 +16,7 @@ public class Chase : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-
+		is_corpse = false;
 		anim = GetComponent<Animator>();
 		in_combat = 0;
 
@@ -24,6 +25,10 @@ public class Chase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(is_corpse){
+
+		}
+		else{
 		hit = gameObject.GetComponentInChildren<detectHit>();
 		if(hit.parry == true){
 			in_combat = 50;
@@ -117,7 +122,7 @@ public class Chase : MonoBehaviour {
 				anim.SetBool("is_attack2",false);
 				
 			}
-		
+		}
 
 	}
 	void OnTriggerEnter(Collider other){
