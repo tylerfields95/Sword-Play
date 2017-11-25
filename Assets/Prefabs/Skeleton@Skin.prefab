@@ -1310,10 +1310,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ed822ad4d36294e8b38c8ddafa085c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  CurrentHealth: 30
+  MaxHealth: 20
+  CurrentHealth: 20
+  death_animation: 
   enemy: {fileID: 4109802259564978}
-  enemyRespawnPoint: {fileID: 4109802259564978}
 --- !u!114 &114330344359676258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1326,6 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  is_corpse: 0
 --- !u!114 &114613335934885050
 MonoBehaviour:
   m_ObjectHideFlags: 1

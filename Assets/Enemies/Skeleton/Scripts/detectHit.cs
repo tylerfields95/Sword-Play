@@ -9,7 +9,7 @@ public class detectHit : MonoBehaviour {
 	public bool parry;
     public Slider healthSlider;
     public int maxHealth;
-    private int damage = 10;
+    public int damage;
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
     
@@ -22,6 +22,7 @@ public class detectHit : MonoBehaviour {
     {
     	if(col.name=="HumanSword"){
 			Debug.Log("PARRY/BLOCK");
+			parry = true;
 			GetBack();
 			anim.SetTrigger("is_blocked");
 		

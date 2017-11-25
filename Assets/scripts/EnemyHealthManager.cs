@@ -22,7 +22,12 @@ public class EnemyHealthManager : MonoBehaviour {
        //makes sure the user cant reset the death animation
         {	CurrentHealth =1000;
         	anim.Play(death_animation);
+        	try{
     		enemy.root.GetComponent<Chase>().is_corpse = true;
+        	}
+        	finally{
+    		enemy.root.GetComponent<BossChase>().is_corpse = true;
+        	}
         	/*enemy.transform.position = enemyRespawnPoint.transform.position;
         	CurrentHealth = 30;*/
         }
