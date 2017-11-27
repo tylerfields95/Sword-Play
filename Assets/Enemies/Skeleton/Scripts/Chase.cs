@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class Chase : MonoBehaviour {
 
 	public Transform player;
 	private Animator anim;
-	private int in_combat;
-	public bool is_corpse;
-	private float speed = .3f;
+	private int in_combat = 0;
+	public bool is_corpse = false;
+	private float speed = 1f;
+	private CharacterController controller;
+	private Vector3 direction;
 	detectHit hit;
+	private NavMeshAgent nav;
 	
 
 
@@ -16,9 +20,9 @@ public class Chase : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		is_corpse = false;
+		nav = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
-		in_combat = 0;
+
 
 	}
 	
@@ -48,17 +52,22 @@ public class Chase : MonoBehaviour {
 			this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
 										Quaternion.LookRotation(direction), 0.1f);
 			
-			
+			/*
 			Vector3 movement = direction*speed;
-
+			*/
 		
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 2 && in_combat <0)
 				{
 
+					nav.enabled = true;
+					nav.SetDestination(player.position);
+
+					/*
 					 movement.y -= 20.0f * Time.deltaTime;
 	
 					controller.Move(movement * Time.deltaTime);
+					*/
 					anim.SetBool("is_walking",true);
 					anim.SetBool("is_attacking",false);
 					anim.SetBool("is_damaged",false);
@@ -75,8 +84,10 @@ public class Chase : MonoBehaviour {
 					//delay for animation before skeleton can walk
 							if(in_combat<0){
 							in_combat = 200;
+							
 							}
-												anim.SetBool("is_attacking",true);
+						nav.enabled = false;
+							anim.SetBool("is_attacking",true);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
 							anim.SetBool("is_block1",false);
@@ -87,7 +98,7 @@ public class Chase : MonoBehaviour {
 							if(in_combat<0){
 							in_combat = 200;
 							}
-
+						nav.enabled = false;
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -100,7 +111,7 @@ public class Chase : MonoBehaviour {
 							if(in_combat<0){
 							in_combat = 150;
 							}
-						
+						nav.enabled = false;
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -114,6 +125,7 @@ public class Chase : MonoBehaviour {
 			}
 			else 
 			{
+						nav.enabled = false;
 				anim.SetBool("is_idle", true);
 				anim.SetBool("is_walking", false);
 				anim.SetBool("is_attacking", false);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class BossChase : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class BossChase : MonoBehaviour {
 	private CharacterController controller;
 	private Vector3 direction;
 	detectHit hit;
+	private NavMeshAgent nav;
 	
 
 
@@ -20,6 +22,7 @@ public class BossChase : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		nav = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
 
 	}
@@ -36,6 +39,12 @@ public class BossChase : MonoBehaviour {
 			if(anim.GetBool("is_charging")){
 				Debug.Log("OH NO");
 				anim.Play("Knockback",0, 0.0f);
+				anim.SetBool("is_idle", false);
+				anim.SetBool("is_walking", false);
+				anim.SetBool("is_attacking", false);
+				anim.SetBool("is_damaged",false);
+				anim.SetBool("is_block1",false);
+				anim.SetBool("is_attack2",false);
 				anim.SetBool("is_charging",false);
 							in_combat = 400;
 							running= false;
@@ -58,23 +67,32 @@ public class BossChase : MonoBehaviour {
 		float angle = Vector3.Angle(direction,this.transform.forward);
 		if(Vector3.Distance(player.position, this.transform.position) < 25 && angle < 180)
 		{
+
 			
 			direction.y = 0;
+			
 			if(can_turn){
 			this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
 										Quaternion.LookRotation(direction), 0.1f);
 			}
+		/*
 			
 			Vector3 movement = direction*speed;
-
+		*/
 		
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 3 && in_combat <0)
 				{
 
+					nav.SetDestination(player.position);
+					nav.enabled = true;
+										 can_turn = true;
+					/*
 					 movement.y -= 20.0f * Time.deltaTime;
-					 can_turn = true;
+
+					 
 					controller.Move(movement * Time.deltaTime);
+					*/
 					anim.SetBool("is_walking",true);
 					anim.SetBool("is_attacking",false);
 					anim.SetBool("is_damaged",false);
@@ -90,12 +108,13 @@ public class BossChase : MonoBehaviour {
 					if(running && rando >1){
 						anim.Play("Charge",0, 0.0f);
 						in_combat = 120;
+						nav.enabled = false;
 						running = false;
 						can_turn = false;
 						anim.SetBool("is_charging",true);
 					}
 					else{
-
+					
 					running = false;
 					rando = Random.Range(1,3);
 					if(rando==1){
@@ -106,6 +125,7 @@ public class BossChase : MonoBehaviour {
 							in_combat = 200;
 							anim.SetBool("is_charging",false);
 							}
+						nav.enabled = false;
 							anim.SetBool("is_attacking",true);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -120,6 +140,7 @@ public class BossChase : MonoBehaviour {
 							can_turn = true;
 							anim.SetBool("is_charging",false);
 							}
+						   nav.enabled = false;
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -134,7 +155,7 @@ public class BossChase : MonoBehaviour {
 			}
 		}
 		else if(in_combat <0)
-			{
+			{	nav.enabled = false;
 				anim.SetBool("is_idle", true);
 				anim.SetBool("is_walking", false);
 				anim.SetBool("is_attacking", false);
