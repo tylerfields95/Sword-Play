@@ -91,8 +91,8 @@ public class sword : MonoBehaviour {
 			{
 			if (region[4] == true)
 				region[3] = true;
+				
 			}
-			
 			Debug.Log("***********************************************");
 			Debug.Log("region 4 " + region[4].ToString());
 			Debug.Log("region 3 " + region[3].ToString());
