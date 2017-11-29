@@ -26,9 +26,11 @@ public class sword : MonoBehaviour {
 		{
 			Cursor.lockState = CursorLockMode.None;
 			Debug.Log(("LM held"));
+			
 			//grabs mouse position relative to the camera viewport (x=0.0-1.0, y=0.0-1.0) 
 			//bottom left == (0.0f,0.0f)
 			mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+			Cursor.visible=false;
 			ScreenRegion(mousePos);	
 		}
 

@@ -6,7 +6,7 @@ public class Chase : MonoBehaviour {
 
 	public Transform player;
 	private Animator anim;
-	private int in_combat = 0;
+	public int in_combat = 0;
 	public bool is_corpse = false;
 	private float speed = 1f;
 	private CharacterController controller;
@@ -29,16 +29,20 @@ public class Chase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(is_corpse){
 
+		if(is_corpse){
+			     foreach(Collider c in GetComponents<Collider> ()) {
+				c.enabled = false;
+			}
 		}
 		else{
+		in_combat--;
 		hit = gameObject.GetComponentInChildren<detectHit>();
 		if(hit.parry == true){
 			in_combat = 50;
 			hit.parry = false;
 		}
-		in_combat--;
+
 
 		 CharacterController controller = GetComponent<CharacterController>();
 

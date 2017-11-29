@@ -6,7 +6,7 @@ public class BossChase : MonoBehaviour {
 
 	public Transform player;
 	private Animator anim;
-	private int in_combat = 0;
+	public int in_combat = 0;
 	public bool is_corpse = false;
 	private float speed = 1f;
 	private bool running = true;
@@ -30,14 +30,22 @@ public class BossChase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		Debug.Log(in_combat);
 		if(is_corpse){
-
+			     foreach(Collider c in GetComponents<Collider> ()) {
+				c.enabled = false;
+		}
 		}
 		else{
+		in_combat--;
 		hit = gameObject.GetComponentInChildren<detectHit>();
 		if(hit.parry == true){
+			controller = transform.root.GetComponent<CharacterController>();
+			direction = player.position - transform.position;
+			direction.y=0;
 			if(anim.GetBool("is_charging")){
 				Debug.Log("OH NO");
+				anim.ResetTrigger("is_blocked");
 				anim.Play("Knockback",0, 0.0f);
 				anim.SetBool("is_idle", false);
 				anim.SetBool("is_walking", false);
@@ -46,20 +54,18 @@ public class BossChase : MonoBehaviour {
 				anim.SetBool("is_block1",false);
 				anim.SetBool("is_attack2",false);
 				anim.SetBool("is_charging",false);
-							in_combat = 400;
-							running= false;
-			controller = transform.root.GetComponent<CharacterController>();
-			direction = player.position - transform.position;
-			direction.y=0;
-			direction = direction*-3.0f;
-			controller.Move(direction * 5*Time.deltaTime);
+				in_combat = 70;
+				running= false;	
+				direction = direction*-3.0f;
+				controller.Move(direction * 5*Time.deltaTime);
 			   }
-			else{
+			else if(in_combat<50){	
 			in_combat = 50;
 			}
 			hit.parry = false;
+			nav.enabled = false;
 		}
-		 in_combat--;
+
 
 		  controller = GetComponent<CharacterController>();
 
@@ -81,9 +87,9 @@ public class BossChase : MonoBehaviour {
 		*/
 		
 				anim.SetBool("is_idle",false);
-				if(direction.magnitude > 3 && in_combat <0)
+				if(direction.magnitude > 2 && in_combat <0)
 				{
-
+					anim.ResetTrigger("is_blocked");
 					nav.SetDestination(player.position);
 					nav.enabled = true;
 										 can_turn = true;
@@ -105,13 +111,20 @@ public class BossChase : MonoBehaviour {
 				else
 				{
 					int rando = Random.Range(1,5);
-					if(running && rando >1){
+					if(running && rando >1 && in_combat<0){
 						anim.Play("Charge",0, 0.0f);
-						in_combat = 120;
+						anim.ResetTrigger("is_blocked");
+						in_combat = 60;
 						nav.enabled = false;
 						running = false;
 						can_turn = false;
 						anim.SetBool("is_charging",true);
+							anim.SetBool("is_attacking",true);
+							anim.SetBool("is_walking",false);
+							anim.SetBool("is_damaged",false);
+							anim.SetBool("is_block1",false);
+							anim.SetBool("is_attack2",false);
+													
 					}
 					else{
 					
@@ -122,8 +135,9 @@ public class BossChase : MonoBehaviour {
 					//delay for animation before skeleton can walk
 					if(in_combat<0){
 							can_turn = true;
-							in_combat = 200;
+							in_combat = 80;
 							anim.SetBool("is_charging",false);
+							anim.ResetTrigger("is_blocked");
 							}
 						nav.enabled = false;
 							anim.SetBool("is_attacking",true);
@@ -136,9 +150,10 @@ public class BossChase : MonoBehaviour {
 					else{
 						//delay for animation before skeleton can walk
 							if(in_combat<0){
-							in_combat = 150;
+							in_combat = 80;
 							can_turn = true;
 							anim.SetBool("is_charging",false);
+							anim.ResetTrigger("is_blocked");
 							}
 						   nav.enabled = false;
 							anim.SetBool("is_attacking",false);

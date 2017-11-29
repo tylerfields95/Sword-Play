@@ -24,9 +24,11 @@ public class EnemyHealthManager : MonoBehaviour {
         	anim.Play(death_animation);
         	try{
     		enemy.root.GetComponent<Chase>().is_corpse = true;
+    		enemy.root.GetComponent<Chase>().in_combat = 300;
         	}
         	finally{
     		enemy.root.GetComponent<BossChase>().is_corpse = true;
+    		enemy.root.GetComponent<Chase>().in_combat = 300;
         	}
         	/*enemy.transform.position = enemyRespawnPoint.transform.position;
         	CurrentHealth = 30;*/
