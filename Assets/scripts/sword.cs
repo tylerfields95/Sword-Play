@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +14,52 @@ public class sword : MonoBehaviour {
     public int damageToGive;
     public Animator swordAnimator;
     public static int can_damage;
-	
+	private Boolean canAttack = true;
+
+
 	// Use this for initialization
 	void Start () {
 		swordAnimator = GetComponent<Animator>();
 	}
+
+	private Vector2 lastAxis;
+	private Vector2 currAxis;
 	
 	// Update is called once per frame
 	void Update () {
 		can_damage --;
+		
+		if (Input.GetMouseButton(0))
+		{
+			Cursor.lockState = CursorLockMode.None;
+			//Cursor.visible = false;
+			
+			float axisX = Input.GetAxis("Mouse X");
+			float axisY = Input.GetAxis("Mouse Y");
+			//Debug.Log("x: " + axisX.ToString());
+			//Debug.Log("y:" + axisY.ToString());
+			currAxis.x = Input.GetAxis("Mouse X");
+			currAxis.y = Input.GetAxis("Mouse Y");
+			
+
+			Debug.Log("curr: " + currAxis.x.ToString());
+
+			if (currAxis.x > 0.5 && canAttack == true) 
+			{
+				swordAnimator.SetTrigger("right_ready");
+				Debug.Log("right_ready");
+			}
+		}
+
+		if (Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") != true)
+		{
+			swordAnimator.SetTrigger("block_trigger");
+		}
+		if (!Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") == true)
+		{
+			swordAnimator.SetBool("is_blocking", false);
+		}
+		/*
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
@@ -37,6 +75,7 @@ public class sword : MonoBehaviour {
 			setFalse();
 			//swordAnimator.SetTrigger("setIdle");
 		}
+		*/
 			
 	}
 	void ScreenRegion(Vector3 mP)
@@ -185,5 +224,23 @@ public class sword : MonoBehaviour {
             
         }
     }
+
+	
+	private void Event_CanAttackAgain()
+	{
+		// This was my test case, you can add anything you need to do after the animation has finished here
+		// Like load a new scene etc
+		canAttack = true;
+	}
+
+	private void Event_Attacking()
+	{
+		canAttack = false;
+	}
+
+	private void is_blocking()
+	{
+		swordAnimator.SetBool("is_blocking", true);
+	}
 
 }
