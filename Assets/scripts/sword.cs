@@ -43,7 +43,7 @@ public class sword : MonoBehaviour {
 	}
 	void ScreenRegion(Vector3 mP)
 	{
-		Debug.Log("entered ScreenRegion");
+
 		if ((mP.x > 0.33 && mP.x < 0.67) && (mP.y > 0.33 && mP.y < 0.67)) //Middle Middle
 		{
 			region[4] = true;

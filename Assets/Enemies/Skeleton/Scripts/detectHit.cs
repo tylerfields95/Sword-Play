@@ -34,6 +34,7 @@ public class detectHit : MonoBehaviour {
         if (col.tag == "Hitbox")
         {
             healthSlider.value -= damage;
+            Debug.Log("hit player");
         }
     }
 

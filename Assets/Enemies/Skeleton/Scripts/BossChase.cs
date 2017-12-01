@@ -30,7 +30,10 @@ public class BossChase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		Debug.Log(in_combat);
+	
+		//Debug.Log(in_combat);
+		
+
 		if(is_corpse){
 			     foreach(Collider c in GetComponents<Collider> ()) {
 				c.enabled = false;
@@ -54,7 +57,7 @@ public class BossChase : MonoBehaviour {
 				anim.SetBool("is_block1",false);
 				anim.SetBool("is_attack2",false);
 				anim.SetBool("is_charging",false);
-				in_combat = 70;
+				in_combat = 200;
 				running= false;	
 				direction = direction*-3.0f;
 				controller.Move(direction * 5*Time.deltaTime);
@@ -111,10 +114,11 @@ public class BossChase : MonoBehaviour {
 				else
 				{
 					int rando = Random.Range(1,5);
-					if(running && rando >1 && in_combat<0){
+					if(running && rando >1 && in_combat<-125){
 						anim.Play("Charge",0, 0.0f);
 						anim.ResetTrigger("is_blocked");
-						in_combat = 60;
+						Debug.Log("Charge");
+						in_combat = 100;
 						nav.enabled = false;
 						running = false;
 						can_turn = false;
@@ -126,41 +130,50 @@ public class BossChase : MonoBehaviour {
 							anim.SetBool("is_attack2",false);
 													
 					}
-					else{
+					else if(in_combat<0){
 					
 					running = false;
 					rando = Random.Range(1,3);
+					Debug.Log(rando);
 					if(rando==1){
-					
+						
+			
 					//delay for animation before skeleton can walk
-					if(in_combat<0){
+					
 							can_turn = true;
-							in_combat = 80;
-							anim.SetBool("is_charging",false);
+							in_combat = 166;
+							Debug.Log("attack");
 							anim.ResetTrigger("is_blocked");
-							}
-						nav.enabled = false;
-							anim.SetBool("is_attacking",true);
+							anim.SetBool("is_attack2",false);
+								anim.SetBool("is_attacking",true);
+							anim.SetBool("is_charging",false);
+
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
 							anim.SetBool("is_block1",false);
-							anim.SetBool("is_attack2",false);
+
+						
+							
+						nav.enabled = false;
+							
 
 					}
 					else{
 						//delay for animation before skeleton can walk
-							if(in_combat<0){
-							in_combat = 80;
+							
+							in_combat = 100;
 							can_turn = true;
-							anim.SetBool("is_charging",false);
+							Debug.Log("attack2");
 							anim.ResetTrigger("is_blocked");
-							}
-						   nav.enabled = false;
 							anim.SetBool("is_attacking",false);
+							anim.SetBool("is_attack2",true);
+							anim.SetBool("is_charging",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
 							anim.SetBool("is_block1",false);
-							anim.SetBool("is_attack2",true);
+							
+						   nav.enabled = false;
+						
 
 						
 					}
@@ -191,6 +204,7 @@ public class BossChase : MonoBehaviour {
 
 
 		if(other.name=="HumanSword" && sword.can_damage>0){
+			Debug.Log("hit by human");
 			anim.Play("Damage",0, 0.0f);
 			in_combat = 50;
 			anim.SetBool("is_idle", false);

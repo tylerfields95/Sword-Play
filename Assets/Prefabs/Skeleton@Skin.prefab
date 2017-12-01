@@ -743,7 +743,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849594333183094}
   m_LocalRotation: {x: 0, y: 0.99156934, z: 0, w: 0.12957758}
-  m_LocalPosition: {x: -12.850208, y: -4.204976e-17, z: 37.875057}
+  m_LocalPosition: {x: 8.1, y: -4.204976e-17, z: 33.6}
   m_LocalScale: {x: 17, y: 17, z: 17}
   m_Children:
   - {fileID: 4854150754773018}
@@ -1053,7 +1053,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594424359231272}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0431, y: 0.0049, z: -0.031}
+  m_LocalPosition: {x: -5.19, y: 0.237, z: -0.293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4109802259564978}
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ed822ad4d36294e8b38c8ddafa085c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 5
   CurrentHealth: 20
   death_animation: Death
   enemy: {fileID: 4109802259564978}
@@ -1327,6 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  in_combat: 0
   is_corpse: 0
 --- !u!114 &114613335934885050
 MonoBehaviour:
@@ -1507,7 +1508,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.2
-  m_Speed: 4.5
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

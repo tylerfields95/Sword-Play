@@ -79,17 +79,15 @@ public class Chase : MonoBehaviour {
 					anim.SetBool("is_attack2",false);
 											
 				}
-				else
+				else if(in_combat<0)
 				{
 					
 					int rando = Random.Range(1,4);
 					if(rando==1){
 					
 					//delay for animation before skeleton can walk
-							if(in_combat<0){
-							in_combat = 200;
-							
-							}
+						
+							in_combat = 100;
 						nav.enabled = false;
 							anim.SetBool("is_attacking",true);
 							anim.SetBool("is_walking",false);
@@ -99,10 +97,9 @@ public class Chase : MonoBehaviour {
 					}
 					else if(rando ==2){
 						//delay for animation before skeleton can walk
-							if(in_combat<0){
-							in_combat = 200;
-							}
-						nav.enabled = false;
+						
+							in_combat = 100;
+							nav.enabled = false;
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -112,10 +109,8 @@ public class Chase : MonoBehaviour {
 					}
 					else{
 						//delay for animation before skeleton can walk
-							if(in_combat<0){
-							in_combat = 150;
-							}
-						nav.enabled = false;
+							in_combat = 100;
+							nav.enabled = false;
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
