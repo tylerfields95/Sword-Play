@@ -34,7 +34,7 @@ public class sword : MonoBehaviour {
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
-			//Cursor.visible = false;
+			Cursor.visible = false;
 			
 			float axisX = Input.GetAxis("Mouse X");
 			float axisY = Input.GetAxis("Mouse Y");
@@ -44,15 +44,20 @@ public class sword : MonoBehaviour {
 			currAxis.y = Input.GetAxis("Mouse Y");
 			
 
-			Debug.Log("curr: " + currAxis.x.ToString());
+			//Debug.Log("curr: " + currAxis.x.ToString());
 
-			if (currAxis.x > 0.5 && canAttack == true) 
+			if (currAxis.x > 0.5) 
 			{
-				swordAnimator.SetTrigger("right_ready");
+				ready_attack();
 				Debug.Log("right_ready");
+				right_idle_on();
 			}
 		}
-		
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("right_idle") == true )
+		{
+			unready_attack();
+			right_idle_off();
+		}
 		
 		//if the right mouse button is held 
 		if (Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") != true)
@@ -62,7 +67,7 @@ public class sword : MonoBehaviour {
 		//when the right mouse button is released 
 		if (!Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") == true)
 		{
-			swordAnimator.SetBool("is_blocking", false);
+			is_not_blocking();
 		}
 		/*
 		if (Input.GetMouseButton(0))
@@ -231,22 +236,33 @@ public class sword : MonoBehaviour {
         }
     }
 
-	
-	private void Event_CanAttackAgain()
-	{
-		// This was my test case, you can add anything you need to do after the animation has finished here
-		// Like load a new scene etc
-		canAttack = true;
-	}
-
-	private void Event_Attacking()
-	{
-		canAttack = false;
-	}
-
 	private void is_blocking()
 	{
 		swordAnimator.SetBool("is_blocking", true);
 	}
+	
+	private void is_not_blocking()
+	{
+		swordAnimator.SetBool("is_blocking", false);
+	}
 
+	private void ready_attack()
+	{
+		swordAnimator.SetBool("readying_attack", true);
+	}
+	
+	private void unready_attack()
+	{
+		Debug.Log("unready_right");
+		swordAnimator.SetBool("readying_attack", false);
+	}
+
+	private void right_idle_on()
+	{
+		swordAnimator.SetBool("right_idle", true);
+	}
+	private void right_idle_off()
+	{
+		swordAnimator.SetBool("right_idle", false);
+	}
 }
