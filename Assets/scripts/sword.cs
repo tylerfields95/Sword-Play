@@ -29,6 +29,8 @@ public class sword : MonoBehaviour {
 	void Update () {
 		can_damage --;
 		
+		
+		//if the left mouse button is held
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
@@ -50,11 +52,14 @@ public class sword : MonoBehaviour {
 				Debug.Log("right_ready");
 			}
 		}
-
+		
+		
+		//if the right mouse button is held 
 		if (Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") != true)
 		{
 			swordAnimator.SetTrigger("block_trigger");
 		}
+		//when the right mouse button is released 
 		if (!Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") == true)
 		{
 			swordAnimator.SetBool("is_blocking", false);
@@ -216,6 +221,7 @@ public class sword : MonoBehaviour {
 			region[i] = false;
 		}
 	}
+	
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy" && can_damage>0)
