@@ -13,13 +13,19 @@ public class Chase : MonoBehaviour {
 	private Vector3 direction;
 	detectHit hit;
 	private NavMeshAgent nav;
-	
+	private bool recent_damage;
+	public AudioSource audio;
+	public AudioClip msc;
+	public AudioClip walking;
+	public AudioClip hit_by_player;
 
 
 
 	// Use this for initialization
 	void Start () 
 	{
+		audio = GetComponent<AudioSource>();
+		recent_damage = false;
 		nav = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
 
@@ -39,6 +45,7 @@ public class Chase : MonoBehaviour {
 		in_combat--;
 		hit = gameObject.GetComponentInChildren<detectHit>();
 		if(hit.parry == true){
+			audio.PlayOneShot(msc,0.7f);
 			in_combat = 50;
 			hit.parry = false;
 		}
@@ -63,7 +70,10 @@ public class Chase : MonoBehaviour {
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 2 && in_combat <0)
 				{
-
+					if(audio.isPlaying == false){
+						audio.PlayOneShot(walking,0.7f);
+					}
+					recent_damage = false;
 					nav.enabled = true;
 					nav.SetDestination(player.position);
 
@@ -81,7 +91,7 @@ public class Chase : MonoBehaviour {
 				}
 				else if(in_combat<0)
 				{
-					
+					recent_damage = false;
 					int rando = Random.Range(1,4);
 					if(rando==1){
 					
@@ -124,6 +134,7 @@ public class Chase : MonoBehaviour {
 			}
 			else 
 			{
+								recent_damage = false;
 						nav.enabled = false;
 				anim.SetBool("is_idle", true);
 				anim.SetBool("is_walking", false);
@@ -139,25 +150,25 @@ public class Chase : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 
 
-		if(other.name=="HumanSword" && sword.can_damage>0){
+		if(other.name=="HumanSword" && sword.can_damage>0&&!recent_damage){
+			recent_damage = true;
+			Debug.Log("hit by human");
 			anim.Play("Damage",0, 0.0f);
 			in_combat = 50;
+			audio.PlayOneShot(hit_by_player,0.7f);
 			anim.SetBool("is_idle", false);
 			anim.SetBool("is_walking", false);
 			anim.SetBool("is_attacking", false);
 			anim.SetBool("is_block1",false);
 			anim.SetBool("is_attack2",false);
-			CharacterController controller = transform.root.GetComponent<CharacterController>();
-			Vector3 direction = player.position - transform.position;
+			controller = transform.root.GetComponent<CharacterController>();
+			direction = player.position - transform.position;
 			direction.y=0;
 			direction = direction*-3.0f;
 			controller.Move(direction * 10*Time.deltaTime);
-		
-			
-
+			GetComponent<EnemyHealthManager>().HurtEnemy(other.GetComponent<sword>().damageToGive);
 			
 		}
-		
 	}
 
 		

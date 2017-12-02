@@ -15,6 +15,11 @@ public class BossChase : MonoBehaviour {
 	private Vector3 direction;
 	detectHit hit;
 	private NavMeshAgent nav;
+	public AudioSource audio;
+	public AudioClip msc;
+	public AudioClip walking;
+	public AudioClip hit_by_player;
+	private bool recent_damage;
 	
 
 
@@ -22,6 +27,8 @@ public class BossChase : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		recent_damage = false;
+		audio = GetComponent<AudioSource>();
 		nav = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
 
@@ -30,8 +37,9 @@ public class BossChase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	
-		//Debug.Log(in_combat);
+
+		/*Debug.Log(in_combat);*/
+		/*Debug.Log(recent_damage);*/
 		
 
 		if(is_corpse){
@@ -43,6 +51,7 @@ public class BossChase : MonoBehaviour {
 		in_combat--;
 		hit = gameObject.GetComponentInChildren<detectHit>();
 		if(hit.parry == true){
+			audio.PlayOneShot(msc,0.7f);
 			controller = transform.root.GetComponent<CharacterController>();
 			direction = player.position - transform.position;
 			direction.y=0;
@@ -77,7 +86,7 @@ public class BossChase : MonoBehaviour {
 		if(Vector3.Distance(player.position, this.transform.position) < 25 && angle < 180)
 		{
 
-			
+
 			direction.y = 0;
 			
 			if(can_turn){
@@ -92,9 +101,13 @@ public class BossChase : MonoBehaviour {
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 2 && in_combat <0)
 				{
+					recent_damage = false;
 					anim.ResetTrigger("is_blocked");
 					nav.SetDestination(player.position);
 					nav.enabled = true;
+					if(audio.isPlaying == false){
+						audio.PlayOneShot(walking,0.7f);
+					}
 										 can_turn = true;
 					/*
 					 movement.y -= 20.0f * Time.deltaTime;
@@ -113,6 +126,7 @@ public class BossChase : MonoBehaviour {
 				}
 				else
 				{
+
 					int rando = Random.Range(1,5);
 					if(running && rando >1 && in_combat<-125){
 						anim.Play("Charge",0, 0.0f);
@@ -131,7 +145,7 @@ public class BossChase : MonoBehaviour {
 													
 					}
 					else if(in_combat<0){
-					
+					recent_damage = false;
 					running = false;
 					rando = Random.Range(1,3);
 					Debug.Log(rando);
@@ -142,7 +156,7 @@ public class BossChase : MonoBehaviour {
 					
 							can_turn = true;
 							in_combat = 166;
-							Debug.Log("attack");
+
 							anim.ResetTrigger("is_blocked");
 							anim.SetBool("is_attack2",false);
 								anim.SetBool("is_attacking",true);
@@ -160,10 +174,10 @@ public class BossChase : MonoBehaviour {
 					}
 					else{
 						//delay for animation before skeleton can walk
-							
+
 							in_combat = 100;
 							can_turn = true;
-							Debug.Log("attack2");
+
 							anim.ResetTrigger("is_blocked");
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_attack2",true);
@@ -171,8 +185,7 @@ public class BossChase : MonoBehaviour {
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
 							anim.SetBool("is_block1",false);
-							
-						   nav.enabled = false;
+						   	nav.enabled = false;
 						
 
 						
@@ -183,7 +196,9 @@ public class BossChase : MonoBehaviour {
 			}
 		}
 		else if(in_combat <0)
-			{	nav.enabled = false;
+		{	
+				nav.enabled = false;
+				recent_damage = false;
 				anim.SetBool("is_idle", true);
 				anim.SetBool("is_walking", false);
 				anim.SetBool("is_attacking", false);
@@ -203,9 +218,11 @@ public class BossChase : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 
 
-		if(other.name=="HumanSword" && sword.can_damage>0){
+		if(other.name=="HumanSword" && sword.can_damage>0&&!recent_damage){
+			recent_damage = true;
 			Debug.Log("hit by human");
 			anim.Play("Damage",0, 0.0f);
+			audio.PlayOneShot(hit_by_player,0.7f);
 			in_combat = 50;
 			anim.SetBool("is_idle", false);
 			anim.SetBool("is_walking", false);
@@ -217,8 +234,7 @@ public class BossChase : MonoBehaviour {
 			direction.y=0;
 			direction = direction*-3.0f;
 			controller.Move(direction * 10*Time.deltaTime);
-		
-			
+			GetComponent<EnemyHealthManager>().HurtEnemy(other.GetComponent<sword>().damageToGive);
 
 			
 		}

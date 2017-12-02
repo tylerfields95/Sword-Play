@@ -25,7 +25,7 @@ public class sword : MonoBehaviour {
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
-			Debug.Log(("LM held"));
+
 			
 			//grabs mouse position relative to the camera viewport (x=0.0-1.0, y=0.0-1.0) 
 			//bottom left == (0.0f,0.0f)
@@ -164,7 +164,7 @@ public class sword : MonoBehaviour {
         if (region[3] == true && region[5] == true)
         {
             setFalse();
-            Debug.Log("swipe right to left");
+
             swordAnimator.SetTrigger("RTL");
             swordAnimator.SetTrigger("setIdle");
             staminaSlider.value -= 5;
@@ -179,6 +179,7 @@ public class sword : MonoBehaviour {
 			region[i] = false;
 		}
 	}
+	/*
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy" && can_damage>0)
@@ -187,5 +188,5 @@ public class sword : MonoBehaviour {
             
         }
     }
-
+*/
 }

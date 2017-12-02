@@ -21,7 +21,6 @@ public class detectHit : MonoBehaviour {
     private void OnTriggerEnter(Collider col)
     {
     	if(col.name=="HumanSword"){
-			Debug.Log("PARRY/BLOCK");
 			parry = true;
 			GetBack();
 			anim.SetTrigger("is_blocked");
@@ -56,9 +55,8 @@ public class detectHit : MonoBehaviour {
 		Debug.Log(direction);
 		direction.y=0;
 		direction = direction*-2.0f;
-				Debug.Log("2: "+direction);
 		controller.Move(direction * 10*Time.deltaTime);
-					Debug.Log("they should have moved");			
+
 
 	
 		
