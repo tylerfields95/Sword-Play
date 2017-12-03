@@ -23,6 +23,7 @@ public class BossChase : MonoBehaviour {
 	public AudioClip attack2;
 	public AudioClip attack1;
 	public AudioClip charge;
+	private bool alerted = false;
 	
 
 
@@ -86,7 +87,10 @@ public class BossChase : MonoBehaviour {
 
 		direction = player.position - this.transform.position;
 		float angle = Vector3.Angle(direction,this.transform.forward);
-		if(Vector3.Distance(player.position, this.transform.position) < 25 && angle < 180)
+		if(Vector3.Distance(player.position, this.transform.position) < 25){
+			alerted = true;
+		}
+		if(alerted)
 		{
 
 
