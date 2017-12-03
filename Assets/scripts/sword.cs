@@ -46,11 +46,16 @@ public class sword : MonoBehaviour {
 
 			//Debug.Log("curr: " + currAxis.x.ToString());
 
-			if (currAxis.x > 0.5) 
+			if (currAxis.x > 0.75) 
 			{
 				ready_attack();
 				Debug.Log("right_ready");
 				right_idle_on();
+				
+			}
+			if (currAxis.x < -0.75 && swordAnimator.GetBool("right_idle") != false)
+			{
+				swordAnimator.SetTrigger("RLSwing");
 			}
 		}
 		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("right_idle") == true )

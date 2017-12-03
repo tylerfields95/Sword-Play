@@ -48,7 +48,7 @@ public class PlayerVitals : MonoBehaviour {
         //Health control section
 
         //Stamina control section
-        if (charController.velocity.magnitude > 0 && Input.GetKey(KeyCode.LeftShift))
+        if (charController.velocity.magnitude > 0 && Input.GetKey(KeyCode.LeftShift) && charController.isGrounded)
         {
             staminaSlider.value -= Time.deltaTime / staminaFallRate * staminaFallMult;
         }

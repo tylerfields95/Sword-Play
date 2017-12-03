@@ -335,7 +335,7 @@ Prefab:
     - target: {fileID: 224663994330070806, guid: e881a4338bcd823478c663fe68727354,
         type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224663994330070806, guid: e881a4338bcd823478c663fe68727354,
         type: 2}
@@ -949,7 +949,7 @@ Transform:
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!64 &1094309601
 MeshCollider:
@@ -1439,6 +1439,31 @@ Prefab:
     - target: {fileID: 4625187689322956, guid: 6fd845a42e2c3144faff3da8c87db60f, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114641897554527248, guid: 6fd845a42e2c3144faff3da8c87db60f,
+        type: 2}
+      propertyPath: staminaRegainMult
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114326517022774232, guid: 6fd845a42e2c3144faff3da8c87db60f,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114326517022774232, guid: 6fd845a42e2c3144faff3da8c87db60f,
+        type: 2}
+      propertyPath: movementSpeedNorm
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114326517022774232, guid: 6fd845a42e2c3144faff3da8c87db60f,
+        type: 2}
+      propertyPath: sprint_modifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114326517022774232, guid: 6fd845a42e2c3144faff3da8c87db60f,
+        type: 2}
+      propertyPath: jumpSpeed
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fd845a42e2c3144faff3da8c87db60f, type: 2}
