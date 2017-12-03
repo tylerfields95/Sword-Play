@@ -18,6 +18,10 @@ public class Chase : MonoBehaviour {
 	public AudioClip msc;
 	public AudioClip walking;
 	public AudioClip hit_by_player;
+	public AudioClip attack2;
+	public AudioClip attack1;
+	public float fiedlOfViewAngle =110f;
+	private bool alerted =false;
 
 
 
@@ -47,6 +51,7 @@ public class Chase : MonoBehaviour {
 		if(hit.parry == true){
 			audio.PlayOneShot(msc,0.7f);
 			in_combat = 50;
+			anim.ResetTrigger("is_blocked");
 			hit.parry = false;
 		}
 
@@ -55,8 +60,19 @@ public class Chase : MonoBehaviour {
 
 		Vector3 direction = player.position - this.transform.position;
 		float angle = Vector3.Angle(direction,this.transform.forward);
-		if(Vector3.Distance(player.position, this.transform.position) < 25 && angle < 180)
-		{
+		if(Vector3.Distance(player.position, this.transform.position) < 25 && angle < 180){
+			RaycastHit detect;
+			if(Physics.Raycast(transform.position + transform.up,direction.normalized,out detect)){
+
+				if(detect.collider.tag =="Hitbox"){
+										alerted =true;
+				}
+			   }
+			
+
+		}
+		if(alerted)
+				{
 			
 			direction.y = 0;
 
@@ -70,9 +86,11 @@ public class Chase : MonoBehaviour {
 				anim.SetBool("is_idle",false);
 				if(direction.magnitude > 2 && in_combat <0)
 				{
+					/* I did not like how walking sounded from multiple enemeies
 					if(audio.isPlaying == false){
 						audio.PlayOneShot(walking,0.7f);
 					}
+					*/
 					recent_damage = false;
 					nav.enabled = true;
 					nav.SetDestination(player.position);
@@ -82,6 +100,7 @@ public class Chase : MonoBehaviour {
 	
 					controller.Move(movement * Time.deltaTime);
 					*/
+					anim.ResetTrigger("is_blocked");
 					anim.SetBool("is_walking",true);
 					anim.SetBool("is_attacking",false);
 					anim.SetBool("is_damaged",false);
@@ -99,6 +118,7 @@ public class Chase : MonoBehaviour {
 						
 							in_combat = 100;
 						nav.enabled = false;
+							anim.ResetTrigger("is_blocked");
 							anim.SetBool("is_attacking",true);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -110,6 +130,7 @@ public class Chase : MonoBehaviour {
 						
 							in_combat = 100;
 							nav.enabled = false;
+							anim.ResetTrigger("is_blocked");
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
@@ -121,11 +142,14 @@ public class Chase : MonoBehaviour {
 						//delay for animation before skeleton can walk
 							in_combat = 100;
 							nav.enabled = false;
+							anim.ResetTrigger("is_blocked");
 							anim.SetBool("is_attacking",false);
 							anim.SetBool("is_walking",false);
 							anim.SetBool("is_damaged",false);
 							anim.SetBool("is_block1",false);
 							anim.SetBool("is_attack2",true);
+						
+
 						
 					}
 	
@@ -169,6 +193,14 @@ public class Chase : MonoBehaviour {
 			GetComponent<EnemyHealthManager>().HurtEnemy(other.GetComponent<sword>().damageToGive);
 			
 		}
+	}
+	void PlayAttack2(){
+					audio.PlayOneShot(attack2,0.7f);
+		
+	}
+	void PlayAttack1(){
+					audio.PlayOneShot(attack1,0.7f);
+		
 	}
 
 		

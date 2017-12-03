@@ -20,6 +20,9 @@ public class BossChase : MonoBehaviour {
 	public AudioClip walking;
 	public AudioClip hit_by_player;
 	private bool recent_damage;
+	public AudioClip attack2;
+	public AudioClip attack1;
+	public AudioClip charge;
 	
 
 
@@ -240,7 +243,18 @@ public class BossChase : MonoBehaviour {
 		}
 		
 	}
-
+	void PlayAttack2(){
+					audio.PlayOneShot(attack2,0.7f);
+		
+	}
+	void PlayAttack1(){
+					audio.PlayOneShot(attack1,0.7f);
+		
+	}
+	void PlayCharge(){
+					audio.PlayOneShot(charge,0.7f);
+		
+	}
 		
 		
 	
