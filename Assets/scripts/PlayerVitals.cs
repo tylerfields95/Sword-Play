@@ -31,6 +31,10 @@ public class PlayerVitals : MonoBehaviour {
         staminaRegainRate = 1;
 
         charController = GetComponent<CharacterController>();
+<<<<<<< HEAD
+=======
+        Debug.Log(charController.velocity.magnitude);
+>>>>>>> bc1e3574ae3edce7113a804ac0501dc044b1728a
         playerController = GetComponent<firstPersonController>();
     }
 

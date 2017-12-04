@@ -4,10 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class detectHit : MonoBehaviour {
+<<<<<<< HEAD
 
     public Slider healthSlider;
     public int maxHealth;
     private int damage = 10;
+=======
+	private Animator anim;
+
+	public bool parry;
+    public Slider healthSlider;
+    public int maxHealth;
+    private int damage = 10;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform respawnPoint;
+>>>>>>> bc1e3574ae3edce7113a804ac0501dc044b1728a
     
     // Use this for initialization
     //void Start () {
@@ -16,7 +27,21 @@ public class detectHit : MonoBehaviour {
    // }
     private void OnTriggerEnter(Collider col)
     {
+<<<<<<< HEAD
         if (col.tag == "Player")
+=======
+    	if(col.name=="HumanSword"){
+			Debug.Log("PARRY/BLOCK");
+			GetBack();
+			anim.SetTrigger("is_blocked");
+		
+
+			
+		
+		
+		}
+        if (col.tag == "Hitbox")
+>>>>>>> bc1e3574ae3edce7113a804ac0501dc044b1728a
         {
             healthSlider.value -= damage;
         }
@@ -24,6 +49,30 @@ public class detectHit : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+<<<<<<< HEAD
+=======
+    	if(healthSlider.value <=0){
+    		player.transform.position = respawnPoint.transform.position;
+    		healthSlider.value = 100;
+    	}
+		
+	}
+    void Start () {
+		anim = transform.root.GetComponent<Animator>();
+		
+	}
+    	void  GetBack(){
+		CharacterController controller = transform.root.GetComponent<CharacterController>();
+		Vector3 direction = player.position - transform.root.transform.position;
+		Debug.Log(direction);
+		direction.y=0;
+		direction = direction*-2.0f;
+				Debug.Log("2: "+direction);
+		controller.Move(direction * 10*Time.deltaTime);
+					Debug.Log("they should have moved");			
+
+	
+>>>>>>> bc1e3574ae3edce7113a804ac0501dc044b1728a
 		
 	}
 }

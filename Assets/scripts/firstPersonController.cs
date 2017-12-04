@@ -15,7 +15,11 @@ public class firstPersonController : MonoBehaviour {
     public float movementSpeedNorm = 5.0f;
     public float walkSpeed = 2.0f;
     public float mouseSensitivity = 5.0f;
+<<<<<<< HEAD
 	public float jumpSpeed = 20.0f;
+=======
+	public float jumpSpeed = 6.0f;
+>>>>>>> bc1e3574ae3edce7113a804ac0501dc044b1728a
 
 	
 	
