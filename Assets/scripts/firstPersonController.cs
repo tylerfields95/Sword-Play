@@ -16,7 +16,6 @@ public class firstPersonController : MonoBehaviour {
     public float walkSpeed = 2.0f;
     public float mouseSensitivity = 5.0f;
 	public float jumpSpeed = 6.0f;
-	public float sprint_modifier = 1.5f;
 
 	
 	
@@ -62,16 +61,16 @@ public class firstPersonController : MonoBehaviour {
 		
 		
 		//jumping
-		if ( characterController.isGrounded && Input.GetButton("Jump"))
+		if ( characterController.isGrounded && Input.GetButtonDown("Jump"))
 		{
 			verticalVelocity = jumpSpeed;
 		}
 		
 		//sprinting speed
-		if (Input.GetButton("Sprint") && characterController.isGrounded)
+		if (Input.GetButton("Sprint"))
 		{
-			forwardSpeed *= sprint_modifier;
-			sideSpeed *= sprint_modifier;
+			forwardSpeed *= 1.5f;
+			sideSpeed *= 1.5f;
 		}
 		
 		//actually moving the character controller 

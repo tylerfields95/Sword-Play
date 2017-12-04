@@ -1,69 +1,94 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class sword : MonoBehaviour {
-	
-	private bool [] region = new bool[9];
-	private float startT;
-	private float endT;
-    public Slider staminaSlider;
-    private Vector3 mousePos;
-    public int damageToGive;
-    public Animator swordAnimator;
-    public static int can_damage;
-	private Boolean canAttack = true;
+public class sword : MonoBehaviour
+{
+
+	private bool[] region = new bool[9];
+	public Slider staminaSlider;
+	private Vector2 currAxis;
+	private Vector3 mousePos;
+	public int damageToGive;
+	public Animator swordAnimator;
+	public static int can_damage;
 
 
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		swordAnimator = GetComponent<Animator>();
 	}
 
-	private Vector2 lastAxis;
-	private Vector2 currAxis;
-	
+
+
+
 	// Update is called once per frame
-	void Update () {
-		can_damage --;
-		
-		
+	void Update()
+	{
+		can_damage--;
+
+		attack();
+		block();
+	}
+
+
+	private void attack()
+	{
 		//if the left mouse button is held
 		if (Input.GetMouseButton(0))
 		{
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = false;
-			
-			float axisX = Input.GetAxis("Mouse X");
-			float axisY = Input.GetAxis("Mouse Y");
-			//Debug.Log("x: " + axisX.ToString());
-			//Debug.Log("y:" + axisY.ToString());
+
 			currAxis.x = Input.GetAxis("Mouse X");
 			currAxis.y = Input.GetAxis("Mouse Y");
-			
 
 			//Debug.Log("curr: " + currAxis.x.ToString());
-
-			if (currAxis.x > 0.75) 
+			
+			//triggers right-ready and right_idle
+			if (currAxis.x > 0.75 && swordAnimator.GetBool("readying_attack") == false)
 			{
+				swordAnimator.SetFloat("axis", currAxis.x);
 				ready_attack();
 				Debug.Log("right_ready");
 				right_idle_on();
-				
 			}
+			//triggers rlSwing
 			if (currAxis.x < -0.75 && swordAnimator.GetBool("right_idle") != false)
 			{
 				swordAnimator.SetTrigger("RLSwing");
 			}
+			
+			//triggers left-ready and then left_idle
+			if (currAxis.x < -0.75 && swordAnimator.GetBool("readying_attack") == false)
+			{
+				swordAnimator.SetFloat("axis", currAxis.x);
+				ready_attack();
+				Debug.Log("left_ready");
+				left_idle_on();
+			}
+			//triggers lrSwing
+			if (currAxis.x > 0.75 && swordAnimator.GetBool("left_idle") != false)
+			{
+				swordAnimator.SetTrigger("LRSwing");
+			}
 		}
-		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("right_idle") == true )
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("right_idle") == true)
 		{
 			unready_attack();
 			right_idle_off();
 		}
-		
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("left_idle") == true)
+		{
+			unready_attack();
+			left_idle_off();
+		}
+	}
+
+	private void block()
+	{
 		//if the right mouse button is held 
 		if (Input.GetMouseButton(1) && swordAnimator.GetBool("is_blocking") != true)
 		{
@@ -74,25 +99,9 @@ public class sword : MonoBehaviour {
 		{
 			is_not_blocking();
 		}
-		/*
-		if (Input.GetMouseButton(0))
-		{
-			Cursor.lockState = CursorLockMode.None;
-			Debug.Log(("LM held"));
-			//grabs mouse position relative to the camera viewport (x=0.0-1.0, y=0.0-1.0) 
-			//bottom left == (0.0f,0.0f)
-			mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-			ScreenRegion(mousePos);	
-		}
-
-		if (!Input.GetMouseButton(0))
-		{
-			setFalse();
-			//swordAnimator.SetTrigger("setIdle");
-		}
-		*/
-			
 	}
+	
+
 	void ScreenRegion(Vector3 mP)
 	{
 		Debug.Log("entered ScreenRegion");
@@ -223,7 +232,6 @@ public class sword : MonoBehaviour {
             can_damage = 150;
         }
 	}
-
 	void setFalse()
 	{
 		for (var i = 0; i < 8; i++)
@@ -245,7 +253,6 @@ public class sword : MonoBehaviour {
 	{
 		swordAnimator.SetBool("is_blocking", true);
 	}
-	
 	private void is_not_blocking()
 	{
 		swordAnimator.SetBool("is_blocking", false);
@@ -255,10 +262,8 @@ public class sword : MonoBehaviour {
 	{
 		swordAnimator.SetBool("readying_attack", true);
 	}
-	
 	private void unready_attack()
 	{
-		Debug.Log("unready_right");
 		swordAnimator.SetBool("readying_attack", false);
 	}
 
@@ -269,5 +274,19 @@ public class sword : MonoBehaviour {
 	private void right_idle_off()
 	{
 		swordAnimator.SetBool("right_idle", false);
+	}
+	
+	private void left_idle_on()
+	{
+		swordAnimator.SetBool("left_idle", true);
+	}
+	private void left_idle_off()
+	{
+		swordAnimator.SetBool("left_idle", false);
+	}
+
+	private void set_axis_zero()
+	{
+		swordAnimator.SetFloat("axis", 0.0f);
 	}
 }

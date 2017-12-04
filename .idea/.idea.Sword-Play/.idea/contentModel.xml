@@ -33,6 +33,7 @@
           <e p="PlayerVitals.cs" t="Include" />
           <e p="sceneMusic.cs" t="Include" />
           <e p="sword.cs" t="Include" />
+          <e p="sword_sounds.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
