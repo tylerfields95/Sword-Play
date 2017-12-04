@@ -51,10 +51,9 @@ public class detectHit : MonoBehaviour {
     	void  GetBack(){
 		CharacterController controller = transform.root.GetComponent<CharacterController>();
 		Vector3 direction = player.position - transform.root.transform.position;
-		Debug.Log(direction);
+
 		direction.y=0;
 		direction = direction*-2.0f;
-				Debug.Log("2: "+direction);
 		controller.Move(direction * 10*Time.deltaTime);
 					Debug.Log("they should have moved");			
 

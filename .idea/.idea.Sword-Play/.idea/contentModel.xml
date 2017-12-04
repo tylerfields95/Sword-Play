@@ -12,7 +12,13 @@
         </e>
         <e p="Enemies" t="Include">
           <e p="Skeleton" t="Include">
+            <e p="Character" t="Include">
+              <e p="A Steel Oxidised Bracer" t="Include">
+                <e p="readme.txt" t="Include" />
+              </e>
+            </e>
             <e p="scripts" t="Include">
+              <e p="BossChase.cs" t="Include" />
               <e p="Chase.cs" t="Include" />
               <e p="detectHit.cs" t="Include" />
             </e>
