@@ -88,8 +88,15 @@ public class BossChase : MonoBehaviour {
 		direction = player.position - this.transform.position;
 		float angle = Vector3.Angle(direction,this.transform.forward);
 		if(Vector3.Distance(player.position, this.transform.position) < 25){
-			alerted = true;
+			RaycastHit detect;
+			if(Physics.Raycast(transform.position + transform.up,direction.normalized,out detect)){
+
+				if(detect.collider.tag =="Hitbox"){
+										alerted =true;
+				}
+			   }
 		}
+			
 		if(alerted)
 		{
 
