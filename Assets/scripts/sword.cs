@@ -33,7 +33,8 @@ public class sword : MonoBehaviour
 		block();
 	}
 
-
+	public float highAxis = 2.0f;
+	public float lowAxis = -2.0f;
 	private void attack()
 	{
 		//if the left mouse button is held
@@ -45,45 +46,92 @@ public class sword : MonoBehaviour
 			currAxis.x = Input.GetAxis("Mouse X");
 			currAxis.y = Input.GetAxis("Mouse Y");
 
-			//Debug.Log("curr: " + currAxis.x.ToString());
-			
 			//triggers right-ready and right_idle
-			if (currAxis.x > 0.75 && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.x > highAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false)
 			{
-				swordAnimator.SetFloat("axis", currAxis.x);
+				swordAnimator.SetFloat("x-axis", currAxis.x);
 				ready_attack();
 				Debug.Log("right_ready");
 				right_idle_on();
 			}
 			//triggers rlSwing
-			if (currAxis.x < -0.75 && swordAnimator.GetBool("right_idle") != false)
+			if (currAxis.x < lowAxis && swordAnimator.GetBool("right_idle") != false)
 			{
 				swordAnimator.SetTrigger("RLSwing");
 			}
 			
 			//triggers left-ready and then left_idle
-			if (currAxis.x < -0.75 && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.x < lowAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false)
 			{
-				swordAnimator.SetFloat("axis", currAxis.x);
+				swordAnimator.SetFloat("x-axis", currAxis.x);
 				ready_attack();
 				Debug.Log("left_ready");
 				left_idle_on();
 			}
 			//triggers lrSwing
-			if (currAxis.x > 0.75 && swordAnimator.GetBool("left_idle") != false)
+			if (currAxis.x > highAxis && swordAnimator.GetBool("left_idle") != false)
 			{
 				swordAnimator.SetTrigger("LRSwing");
 			}
+			
+			//triggers overhead ready then overhead idle
+			if (currAxis.y > highAxis && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			{
+				swordAnimator.SetFloat("y-axis", currAxis.y);
+				ready_attack();
+				Debug.Log("overhead_ready");
+				overhead_idle_on();
+			}
+			if (currAxis.y < lowAxis && swordAnimator.GetBool("overhead_idle") != false)
+			{
+				swordAnimator.SetTrigger("overhead_swing");
+			}
+			
+			//triggers middle_stab and then middle_stab_idle
+			if (currAxis.y < lowAxis && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			{
+				swordAnimator.SetFloat("y-axis", currAxis.y);
+				ready_attack();
+				Debug.Log("stab_ready");
+				stab_idle_on();
+			}
+			//triggers middle_stab_thrust
+			if (currAxis.y > highAxis && swordAnimator.GetBool("stab_idle") != false)
+			{
+				swordAnimator.SetTrigger("stab");
+			}
 		}
+		
+		//makes sure everything is reset when the mouse button is released
 		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("right_idle") == true)
 		{
 			unready_attack();
 			right_idle_off();
+			set_axis_zero();
 		}
 		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("left_idle") == true)
 		{
 			unready_attack();
 			left_idle_off();
+			set_axis_zero();
+		}
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("left_idle") == true)
+		{
+			unready_attack();
+			left_idle_off();
+			set_axis_zero();
+		}
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("overhead_idle") == true)
+		{
+			unready_attack();
+			overhead_idle_off();
+			set_axis_zero();
+		}
+		if (!Input.GetMouseButton(0) && swordAnimator.GetBool("stab_idle") == true)
+		{
+			unready_attack();
+			stab_idle_off();
+			set_axis_zero();
 		}
 	}
 
@@ -285,8 +333,27 @@ public class sword : MonoBehaviour
 		swordAnimator.SetBool("left_idle", false);
 	}
 
+	private void overhead_idle_on()
+	{
+		swordAnimator.SetBool("overhead_idle", true);
+	}
+	private void overhead_idle_off()
+	{
+		swordAnimator.SetBool("overhead_idle", false);
+	}
+	
+	private void stab_idle_on()
+	{
+		swordAnimator.SetBool("stab_idle", true);
+	}
+	private void stab_idle_off()
+	{
+		swordAnimator.SetBool("stab_idle", false);
+	}
+
 	private void set_axis_zero()
 	{
-		swordAnimator.SetFloat("axis", 0.0f);
+		swordAnimator.SetFloat("x-axis", 0.0f);
+		swordAnimator.SetFloat("y-axis", 0.0f);
 	}
 }
