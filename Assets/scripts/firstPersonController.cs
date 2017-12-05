@@ -32,16 +32,19 @@ public class firstPersonController : MonoBehaviour {
         //locks cursor to the game
         characterController = GetComponent<CharacterController>();
 
-
 	}
-	
+
+
+	private float forwardSpeed = 0;
+	private float sideSpeed = 0;
 	// Update is called once per frame
 	void Update () {
 		
 		//movement
-        float forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
-        float sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
-		
+			forwardSpeed = Input.GetAxis("Vertical") * movementSpeed;
+			sideSpeed = Input.GetAxis("Horizontal") * movementSpeed;
+	
+
 		//gravity
 		verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
@@ -61,13 +64,13 @@ public class firstPersonController : MonoBehaviour {
 		
 		
 		//jumping
-		if ( characterController.isGrounded && Input.GetButtonDown("Jump"))
+		if ( characterController.isGrounded && Input.GetButton("Jump"))
 		{
 			verticalVelocity = jumpSpeed;
 		}
 		
 		//sprinting speed
-		if (Input.GetButton("Sprint"))
+		if (Input.GetButton("Sprint") && characterController.isGrounded)
 		{
 			forwardSpeed *= 1.5f;
 			sideSpeed *= 1.5f;
