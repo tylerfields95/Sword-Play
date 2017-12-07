@@ -35,6 +35,7 @@ public class sword : MonoBehaviour
 
 	public float highAxis = 2.0f;
 	public float lowAxis = -2.0f;
+	public int attackStam = 5;
 	private void attack()
 	{
 		//if the left mouse button is held
@@ -47,7 +48,8 @@ public class sword : MonoBehaviour
 			currAxis.y = Input.GetAxis("Mouse Y");
 
 			//triggers right-ready and right_idle
-			if (currAxis.x > highAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.x > highAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false
+			    && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetFloat("x-axis", currAxis.x);
 				ready_attack();
@@ -55,13 +57,14 @@ public class sword : MonoBehaviour
 				right_idle_on();
 			}
 			//triggers rlSwing
-			if (currAxis.x < lowAxis && swordAnimator.GetBool("right_idle") != false)
+			if (currAxis.x < lowAxis && swordAnimator.GetBool("right_idle") != false && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetTrigger("RLSwing");
 			}
 			
 			//triggers left-ready and then left_idle
-			if (currAxis.x < lowAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.x < lowAxis && currAxis.y < highAxis && currAxis.y > lowAxis && swordAnimator.GetBool("readying_attack") == false
+			    && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetFloat("x-axis", currAxis.x);
 				ready_attack();
@@ -69,26 +72,28 @@ public class sword : MonoBehaviour
 				left_idle_on();
 			}
 			//triggers lrSwing
-			if (currAxis.x > highAxis && swordAnimator.GetBool("left_idle") != false)
+			if (currAxis.x > highAxis && swordAnimator.GetBool("left_idle") != false && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetTrigger("LRSwing");
 			}
 			
 			//triggers overhead ready then overhead idle
-			if (currAxis.y > highAxis && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.y > (highAxis/2.2) && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false
+			    && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetFloat("y-axis", currAxis.y);
 				ready_attack();
 				Debug.Log("overhead_ready");
 				overhead_idle_on();
 			}
-			if (currAxis.y < lowAxis && swordAnimator.GetBool("overhead_idle") != false)
+			if (currAxis.y < (lowAxis/2.2) && swordAnimator.GetBool("overhead_idle") != false && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetTrigger("overhead_swing");
 			}
 			
 			//triggers middle_stab and then middle_stab_idle
-			if (currAxis.y < lowAxis && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false)
+			if (currAxis.y < (lowAxis/2.2) && currAxis.x < highAxis && currAxis.x > lowAxis && swordAnimator.GetBool("readying_attack") == false
+			    && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetFloat("y-axis", currAxis.y);
 				ready_attack();
@@ -96,7 +101,7 @@ public class sword : MonoBehaviour
 				stab_idle_on();
 			}
 			//triggers middle_stab_thrust
-			if (currAxis.y > highAxis && swordAnimator.GetBool("stab_idle") != false)
+			if (currAxis.y > (highAxis/2.2) && swordAnimator.GetBool("stab_idle") != false && staminaSlider.value >= attackStam)
 			{
 				swordAnimator.SetTrigger("stab");
 			}
@@ -150,144 +155,6 @@ public class sword : MonoBehaviour
 	}
 	
 
-	void ScreenRegion(Vector3 mP)
-	{
-		Debug.Log("entered ScreenRegion");
-		if ((mP.x > 0.33 && mP.x < 0.67) && (mP.y > 0.33 && mP.y < 0.67)) //Middle Middle
-		{
-			region[4] = true;
-			//startT = Time.time;
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if (mP.x < 0.34 && mP.y < 0.34) //Bottom Left
-		{
-
-			if (region[4] == true)
-			{
-				region[0] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 0 " + region[0].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if ((mP.x > 0.33 && mP.x < 0.67) && mP.y < 0.34) //Bottom Middle
-		{
-			if (region[4] == true)
-			{
-				region[1] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 1 " + region[1].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if (mP.x > 0.66 && mP.y < 0.34) //Bottom Right
-		{
-			if (region[4] == true)
-			{
-				region[2] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 2 " + region[2].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if (mP.x < 0.34 && (mP.y > 0.33 && mP.y < 0.67)) //Middle Left
-		{
-			{
-			if (region[4] == true)
-				region[3] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 3 " + region[3].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		
-		if (mP.x > 0.66 && (mP.y > 0.33 && mP.y < 0.67)) //Middle Right
-		{
-			if (region[4] == true)
-			{
-				region[5] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 5 " + region[5].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if (mP.x < 0.34 && mP.y > 0.66) //Top Left
-		{
-			if (region[4] == true)
-			{
-				region[6] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 6 " + region[6].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if ((mP.x > 0.33 && mP.x < 0.67) && mP.y > 0.66) //Top Middle
-		{
-			if (region[4] == true)
-			{
-				region[7] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 7 " + region[7].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-		if (mP.x > 0.66 && mP.y > 0.66) //Top Right
-		{
-			if (region[4] == true)
-			{
-				region[8] = true;
-			}
-			/*
-			Debug.Log("***********************************************");
-			Debug.Log("region 4 " + region[4].ToString());
-			Debug.Log("region 8 " + region[8].ToString());
-			Debug.Log("***********************************************");
-			*/
-		}
-
-        if (region[3] == true && region[5] == true)
-        {
-            setFalse();
-            Debug.Log("swipe right to left");
-            swordAnimator.SetTrigger("RTL");
-            swordAnimator.SetTrigger("setIdle");
-            staminaSlider.value -= 5;
-            can_damage = 150;
-        }
-	}
-	void setFalse()
-	{
-		for (var i = 0; i < 8; i++)
-		{
-			region[i] = false;
-		}
-	}
-	
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy" && can_damage>0)
@@ -360,4 +227,9 @@ public class sword : MonoBehaviour
     {
         can_damage = 60;
     }
+
+	private void gettingTired()
+	{
+		staminaSlider.value -= attackStam;
+	}
 }

@@ -249,6 +249,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.016666668
+    functionName: gettingTired
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.033333335
     functionName: candamage
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -262,7 +269,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
+  - time: 0.98333335
     functionName: unready_attack
     data: 
     objectReferenceParameter: {fileID: 0}
