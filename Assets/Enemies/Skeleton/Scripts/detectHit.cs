@@ -20,6 +20,7 @@ public class detectHit : MonoBehaviour {
    // }
     private void OnTriggerEnter(Collider col)
     {
+
     	if(col.name=="HumanSword"){
 			parry = true;
 			GetBack();
