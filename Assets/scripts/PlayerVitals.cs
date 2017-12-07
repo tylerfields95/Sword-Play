@@ -15,6 +15,7 @@ public class PlayerVitals : MonoBehaviour {
     public int staminaFallMult;
     private int staminaRegainRate;
     public int staminaRegainMult;
+    
 
     private CharacterController charController;
     private firstPersonController playerController;
@@ -46,7 +47,6 @@ public class PlayerVitals : MonoBehaviour {
     void Update()
     {
         //Health control section
-
         //Stamina control section
         if (charController.velocity.magnitude > 0 && Input.GetKey(KeyCode.LeftShift) && charController.isGrounded)
         {
@@ -65,12 +65,26 @@ public class PlayerVitals : MonoBehaviour {
         else if (staminaSlider.value <= 0)
         {
             staminaSlider.value = 0;
-            playerController.movementSpeed = playerController.walkSpeed;
+            if (GameObject.Find("speedChest") == null)
+            {
+                playerController.movementSpeed = playerController.upgradedMove;
+            }
+            else
+            {
+                playerController.movementSpeed = playerController.walkSpeed;
+            }
         }
 
         else if(staminaSlider.value >= 0)
         {
-            playerController.movementSpeed = playerController.movementSpeedNorm;
+            if (GameObject.Find("speedChest") == null)
+            {
+                playerController.movementSpeed = playerController.upgradedSprint;
+            }
+            else
+            {
+                playerController.movementSpeed = playerController.movementSpeedNorm;
+            }
         }
     }
 }

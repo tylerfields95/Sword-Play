@@ -51,9 +51,8 @@ public class Chase : MonoBehaviour {
 		if(hit.parry == true){
 			audio.PlayOneShot(msc,0.7f);
 			in_combat = 50;
+			anim.ResetTrigger("is_blocked");
 			hit.parry = false;
-
-
 		}
 
 
@@ -92,7 +91,6 @@ public class Chase : MonoBehaviour {
 						audio.PlayOneShot(walking,0.7f);
 					}
 					*/
-					anim.ResetTrigger("is_blocked");
 					recent_damage = false;
 					nav.enabled = true;
 					nav.SetDestination(player.position);
@@ -102,7 +100,7 @@ public class Chase : MonoBehaviour {
 	
 					controller.Move(movement * Time.deltaTime);
 					*/
-
+					anim.ResetTrigger("is_blocked");
 					anim.SetBool("is_walking",true);
 					anim.SetBool("is_attacking",false);
 					anim.SetBool("is_damaged",false);
@@ -202,10 +200,6 @@ public class Chase : MonoBehaviour {
 	}
 	void PlayAttack1(){
 					audio.PlayOneShot(attack1,0.7f);
-		
-	}
-	void SetInCombat(int x){
-		in_combat = x;
 		
 	}
 

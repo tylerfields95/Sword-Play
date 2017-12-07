@@ -157,8 +157,8 @@ GameObject:
   - component: {fileID: 95948820979110588}
   - component: {fileID: 136432076056627712}
   - component: {fileID: 114645402778676446}
+  - component: {fileID: 114021868939796786}
   - component: {fileID: 143776585234612984}
-  - component: {fileID: 114162704002183338}
   - component: {fileID: 195759251879141476}
   - component: {fileID: 82291024492038856}
   m_Layer: 0
@@ -1329,7 +1329,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179468706474376}
   m_LocalRotation: {x: 0, y: 0.99156934, z: 0, w: 0.12957758}
-  m_LocalPosition: {x: 46.44, y: -0.02, z: 40.89}
+  m_LocalPosition: {x: 278.87, y: 22.99, z: 340.14}
   m_LocalScale: {x: 19, y: 19, z: 19}
   m_Children:
   - {fileID: 4854331422688150}
@@ -2238,7 +2238,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114162704002183338
+--- !u!114 &114021868939796786
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2246,11 +2246,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1179468706474376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ed822ad4d36294e8b38c8ddafa085c, type: 3}
+  m_Script: {fileID: 11500000, guid: e10b6ee32b53a734cbf64d146dd73b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
-  CurrentHealth: 30
+  MaxHealth: 150
+  CurrentHealth: 150
   death_animation: Death
   enemy: {fileID: 4725995751010720}
 --- !u!114 &114354161492748966

@@ -13,10 +13,11 @@ using UnityEngine;
 public class firstPersonController : MonoBehaviour {
     public float movementSpeed = 5.0f;
     public float movementSpeedNorm = 5.0f;
+    public float upgradedMove = 4.0f;
+    public float upgradedSprint = 7.0f;
     public float walkSpeed = 2.0f;
     public float mouseSensitivity = 5.0f;
 	public float jumpSpeed = 6.0f;
-
 	
 	
     float verticleRotation = 0;

@@ -16,17 +16,9 @@ public class footSteps : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
-		if (firstPersonController.isGrounded == true && firstPersonController.velocity.magnitude > 7 && footStep.isPlaying == false)
+		if (firstPersonController.isGrounded == true && firstPersonController.velocity.magnitude > 2 && footStep.isPlaying == false)
 		{
 			footStep.Play();
-			footStep.pitch = 1.5f;
 		}
-		if (firstPersonController.isGrounded == true && firstPersonController.velocity.magnitude > 1 && footStep.isPlaying == false)
-		{
-			footStep.Play();
-			footStep.pitch = 1;
-		}
-		
-
 	}
 }

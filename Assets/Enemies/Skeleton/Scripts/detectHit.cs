@@ -20,7 +20,6 @@ public class detectHit : MonoBehaviour {
    // }
     private void OnTriggerEnter(Collider col)
     {
-
     	if(col.name=="HumanSword"){
 			parry = true;
 			GetBack();
@@ -33,8 +32,14 @@ public class detectHit : MonoBehaviour {
 		}
         if (col.tag == "Hitbox")
         {
-            healthSlider.value -= damage;
-            Debug.Log("hit player");
+            if (GameObject.Find("armorChest") == null)
+            {
+                healthSlider.value -= (damage - 5);
+            }
+            else
+            {
+                healthSlider.value -= damage;
+            }
         }
     }
 
