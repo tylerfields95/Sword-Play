@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64d4416b-9556-4061-8aba-cb8b94f6583b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/Scenes/combat_test.unity" afterPath="$PROJECT_DIR$/Assets/Scenes/combat_test.unity" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/HumanSword.controller" afterPath="$PROJECT_DIR$/Assets/animation/HumanSword.controller" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/block_idle.anim" afterPath="$PROJECT_DIR$/Assets/animation/block_idle.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/block_transition.anim" afterPath="$PROJECT_DIR$/Assets/animation/block_transition.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/lr-swing.anim" afterPath="$PROJECT_DIR$/Assets/animation/lr-swing.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/middle_stab_thrust.anim" afterPath="$PROJECT_DIR$/Assets/animation/middle_stab_thrust.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/overhead_swing.anim" afterPath="$PROJECT_DIR$/Assets/animation/overhead_swing.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/animation/rlSwing.anim" afterPath="$PROJECT_DIR$/Assets/animation/rlSwing.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/scripts/EnemyHealthManager.cs.meta" afterPath="$PROJECT_DIR$/Assets/scripts/EnemyHealthManager.cs.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/scripts/sword.cs" afterPath="$PROJECT_DIR$/Assets/scripts/sword.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Assets/scripts/footSteps.cs" afterPath="$PROJECT_DIR$/Assets/scripts/footSteps.cs" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -94,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnemyHealthManager.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EnemyHealthManager.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/scripts/EnemyHealthManager.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -115,6 +106,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="footSteps.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/scripts/footSteps.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding>
+                <marker date="1512635407698" expanded="false" signature="6:78" ph="..." />
+                <marker date="1512635407698" expanded="true" signature="118:785" ph="{...}" />
+                <marker date="1512635407698" expanded="true" signature="249:358" ph="{...}" />
+                <marker date="1512635407698" expanded="true" signature="413:783" ph="{...}" />
+                <marker date="1512635407698" expanded="true" signature="544:598" ph="{...}" />
+                <marker date="1512635407698" expanded="true" signature="725:776" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="firstPersonController.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/scripts/firstPersonController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-27">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1512631622760" expanded="false" signature="6:273" ph="..." />
+                <marker date="1512631622760" expanded="true" signature="374:2262" ph="{...}" />
+                <marker date="1512631622760" expanded="true" signature="808:915" ph="{...}" />
+                <marker date="1512631622760" expanded="true" signature="1033:2260" ph="{...}" />
+                <marker date="1512631622760" expanded="true" signature="1350:1759" ph="{...}" />
+                <marker date="1512631622760" expanded="true" signature="1846:1887" ph="{...}" />
+                <marker date="1512631622760" expanded="true" signature="1977:2032" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -124,11 +150,14 @@
     <setting file="file://$PROJECT_DIR$/Assets/scripts/PlayerVitals.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/scripts/sword.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/scripts/EnemyHealthManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/scripts/footSteps.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/scripts/firstPersonController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/scripts/sword.cs" />
+        <option value="$PROJECT_DIR$/Assets/scripts/footSteps.cs" />
       </list>
     </option>
   </component>
@@ -203,12 +232,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1512632719005</updated>
-      <workItem from="1512632722995" duration="2026000" />
+      <workItem from="1512632722995" duration="2625000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2026000" />
+    <option name="totallyTimeSpent" value="2625000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -340,6 +369,37 @@
             <marker date="1512631622757" expanded="true" signature="991:1088" ph="/* enemy.transform.position = enemyRespawnPoint.transform.position; ... */" />
             <marker date="1512631622757" expanded="true" signature="1150:1201" ph="{...}" />
             <marker date="1512631622757" expanded="true" signature="1232:1279" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/scripts/firstPersonController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1512631622760" expanded="false" signature="6:273" ph="..." />
+            <marker date="1512631622760" expanded="true" signature="374:2262" ph="{...}" />
+            <marker date="1512631622760" expanded="true" signature="808:915" ph="{...}" />
+            <marker date="1512631622760" expanded="true" signature="1033:2260" ph="{...}" />
+            <marker date="1512631622760" expanded="true" signature="1350:1759" ph="{...}" />
+            <marker date="1512631622760" expanded="true" signature="1846:1887" ph="{...}" />
+            <marker date="1512631622760" expanded="true" signature="1977:2032" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/scripts/footSteps.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <marker date="1512635407698" expanded="false" signature="6:78" ph="..." />
+            <marker date="1512635407698" expanded="true" signature="118:785" ph="{...}" />
+            <marker date="1512635407698" expanded="true" signature="249:358" ph="{...}" />
+            <marker date="1512635407698" expanded="true" signature="413:783" ph="{...}" />
+            <marker date="1512635407698" expanded="true" signature="544:598" ph="{...}" />
+            <marker date="1512635407698" expanded="true" signature="725:776" ph="{...}" />
           </folding>
         </state>
       </provider>
